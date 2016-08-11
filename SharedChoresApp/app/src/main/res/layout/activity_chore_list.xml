@@ -19,17 +19,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="create a group"
-                android:id="@+id/addGroupTextView"
+                android:text="create a chore list"
+                android:id="@+id/addChoreListTextView"
                 android:textSize="30sp"
-                android:layout_above="@+id/groupNameEditText"
+                android:layout_above="@+id/listNameEditText"
                 android:layout_centerHorizontal="true" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/groupNameEditText"
-                android:hint="group name"
+                android:id="@+id/listNameEditText"
+                android:hint="list name"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
@@ -37,9 +37,9 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/addGroupButton"
+                android:id="@+id/addChoreListButton"
                 android:text="create"
-                android:layout_below="@+id/groupNameEditText"
+                android:layout_below="@+id/listNameEditText"
                 android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
@@ -47,7 +47,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/groupNameListView"
+            android:id="@+id/listNameListView"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:textSize="16sp"
