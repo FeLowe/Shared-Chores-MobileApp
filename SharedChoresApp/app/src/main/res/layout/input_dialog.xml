@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:background="@android:color/transparent"
-tools:context="ui.ChoreListActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-<EditText
-    android:id="@+id/listNameEditText"
-    android:layout_width="match_parent"
+<!--<EditText-->
+    <!--android:id="@+id/listNameEditText"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:imeOptions="actionDone|flagNoExtractUi"-->
+    <!--android:inputType="textCapWords"-->
+    <!--android:textAlignment="center" />-->
+<TextView
+    android:id="@+id/choreListTextView"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:imeOptions="actionDone|flagNoExtractUi"
-    android:inputType="textCapWords"
-    android:hint="list name"
+    android:text="List Name : "
+    android:textAppearance="?android:attr/textAppearanceLarge"
     android:textAlignment="center" />
+
+
+    <EditText
+        android:id="@+id/choreListNameEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <requestFocus />
+
+    </EditText>
+
 
     <!--<EditText-->
         <!--android:id="@+id/ownerNameEditText"-->
@@ -27,4 +44,4 @@ tools:context="ui.ChoreListActivity">
         <!--android:hint="list owner" />-->
 
 
-</RelativeLayout>
+</LinearLayout>

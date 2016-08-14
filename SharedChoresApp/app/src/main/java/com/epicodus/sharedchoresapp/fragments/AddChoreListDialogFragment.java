@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 
 public class AddChoreListDialogFragment extends DialogFragment {
 
-    EditText mListNameEditText;
+    EditText mChoreListNameEditText;
     EditText mOwnerNameEditText;
 
 
@@ -76,14 +76,14 @@ public class AddChoreListDialogFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View rootView = inflater.inflate(R.layout.input_dialog, null);
-        mListNameEditText = (EditText) rootView.findViewById(R.id.listNameEditText);
+        mChoreListNameEditText = (EditText) rootView.findViewById(R.id.choreListNameEditText);
 //        mOwnerNameEditText = (EditText) rootView.findViewById(R.id.ownerNameEditText);
 
 
         /**
          * Call addShoppingList() when user taps "Done" keyboard action
          */
-        mListNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mChoreListNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE || keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
@@ -130,7 +130,7 @@ public class AddChoreListDialogFragment extends DialogFragment {
 
         DatabaseReference choreListRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_CHORE_LIST);
 
-        String listName = mListNameEditText.getText().toString().trim();
+        String listName = mChoreListNameEditText.getText().toString().trim();
 
         /* Build the shopping list */
         ChoreList newChoreList = new ChoreList(listName, "created by: Fernanda");

@@ -1,5 +1,8 @@
 package com.epicodus.sharedchoresapp.models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ChoreList {
     private String listName;
     private String owner;
