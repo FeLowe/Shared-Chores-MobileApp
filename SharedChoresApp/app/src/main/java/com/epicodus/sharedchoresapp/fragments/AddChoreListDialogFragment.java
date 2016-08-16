@@ -128,15 +128,18 @@ public class AddChoreListDialogFragment extends DialogFragment {
 
     public void addChoreList() {
 
-        DatabaseReference choreListRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_CHORE_LIST);
-
+        DatabaseReference choreListRef = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_CHILD_CHORE_LIST).push();
         String listName = mChoreListNameEditText.getText().toString().trim();
 
         /* Build the shopping list */
         ChoreList newChoreList = new ChoreList(listName, "created by: Fernanda");
-        choreListRef.child(Constants.FIREBASE_PROPERTY_LIST_NAME)
-                .push()
-                .setValue(newChoreList);
+        String pushId = choreListRef.getKey();
+        newChoreList.setChoreListId(pushId);
+        choreListRef.setValue(newChoreList);
+//        choreListRef.push()
+//
+//
+//                .setValue(newChoreList);
 
         HashMap<String, Object> choreListMap = (HashMap<String, Object>)
                 new ObjectMapper().convertValue(newChoreList, Map.class);

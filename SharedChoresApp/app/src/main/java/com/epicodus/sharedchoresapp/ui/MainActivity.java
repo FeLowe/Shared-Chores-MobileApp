@@ -44,6 +44,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private DatabaseReference mChoreListReference;
+    private Query mChoreListReference;
     private FirebaseListAdapter mFirebaseAdapter;
     private String mListName;
     ArrayList<String> mChoreListArray = new ArrayList<>();
@@ -63,8 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mAddChoreListButton;
     //    @Bind(R.id.buttonSave) Button mButtonSave;
     @Bind(R.id.listView)
-    TextView mListView;
+    ListView mListView;
 //    @Bind(R.id.choreListNameEditText) EditText mChoreListNameEditText;
+
+    private ArrayAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,46 +76,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         mAddChoreListButton.setOnClickListener(this);
 
+        mAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, mChoreListArray);
+        mListView.setAdapter(mAdapter);
+
+
         mChoreListReference = FirebaseDatabase
                 .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_CHORE_LIST);
+                .getReference(Constants.FIREBASE_CHILD_CHORE_LIST)
+                .limitToLast(1);
 
-            mChoreListReference.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        ChoreList newChoreList = dataSnapshot.getValue(ChoreList.class);
-                        mListView.setText(newChoreList.getListName());
-                    }
-//                    if (mChoreListArray.size() > 0) {
-//                        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, mChoreListArray);
-//                        mListView.setAdapter(adapter);
-//                        adapter.notifyDataSetChanged();
-//                    } else {
-//                        Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+        mChoreListReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d("child", snapshot.getValue(ChoreList.class).getListName() + "null?");
                 }
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
 
-                }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+        });
 
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-            });
+//            mChoreListReference.addChildEventListener(new ChildEventListener() {
+//                @Override
+//                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//                    ChoreList newChoreList = dataSnapshot.getValue(ChoreList.class);
+//                    mChoreListArray.add(newChoreList.getListName());
+//                    Log.d("item", newChoreList.getListName());
+//                    mAdapter.notifyDataSetChanged();
+//
+////                    if (mChoreListArray.size() > 0) {
+////                        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, mChoreListArray);
+////                        mListView.setAdapter(adapter);
+////                        adapter.notifyDataSetChanged();
+////                    } else {
+////                        Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+////                    }
+//                }
+//                @Override
+//                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                }
+//
+//                @Override
+//                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//
+//            });
         }
 
     @Override
